@@ -5,9 +5,9 @@ class ActivitiesController < ApplicationController
 		@users = current_user.active_friends
 		@users.push(current_user)
 		case params[:content] when 'posts' 
-			@activities = PublicActivity::Activity.where(owner: @users, trackable_type: "Post").order('created_at DESC')
+			@activities = PublicActivity::Activity.where(owner_id: @users, trackable_type: "Post").order('created_at DESC')
 		else 
-			@activities = PublicActivity::Activity.where(owner: @users).order('created_at DESC')
+			@activities = PublicActivity::Activity.where(owner_id: @users).order('created_at DESC')
 		end
 	end
 
