@@ -6,8 +6,44 @@
 
 <%= link_to "Everything", activities_path, class: "btn btn-default #{'active' unless params[:content]}" %>
 <%= link_to "Just Posts", activities_path(content: "posts"), class: "btn btn-default #{'active' if params[:content] == 'posts'}" %>
-
-
 	
 </div>
+</div>
+
+<div class="container">
+	<ul class="timeline">
+	    
+	<% @activities.each_with_index do |activity| %>
+
+	<% if activity.trackable %>
+
+	<% if cycle('odd', 'even') == 'odd' %>
+	<li class="timeline-inverted">
+	else
+	<li>
+    <% end %>
+	<div class="timeline-badge"><% gravatar_tag activity.owner.email, size: 55 %></div>
+	<div class="timeline-panel">
+	<div class="timeline-heading">
+	
+	<h4 class="timeline-title"><% link_to activity.owner.username, user_path(activity.owner.username) %></h4>
+	<p><small><% time_ago_in_words(activity.created_at) %></small>ago</p> 
+	</div>
+	
+	<div class="timeline-body">
+
+	
+
+
+	</div>
+
+	</div>
+
+    <% end %>
+    <% end %>
+
+
+
+	</ul>
+
 </div>
